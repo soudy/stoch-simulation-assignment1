@@ -14,7 +14,7 @@ def uniform_sampler(rng, lows, highs, n_samples):
 
 
 def latin_square_sampler(rng, lows, highs, n_samples):
-    sampler = qmc.LatinHypercube(d=2)
+    sampler = qmc.LatinHypercube(d=2, seed=rng)
     sample = sampler.random(n_samples)
     scaled = qmc.scale(sample, lows, high)
 
