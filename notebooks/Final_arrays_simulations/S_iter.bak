@@ -1,2 +1,6 @@
 'Approx_areas_list_S', (1024, 43154)
 'sample_size_range_S', (512, 265)
+'Approx_areas_list_S_Uni', (46592, 43154)
+'sample_size_range_S_Uni', (45056, 265)
+'Approx_areas_list_S_LHS', (114688, 43154)
+'sample_size_range_S_LHS', (46080, 265)

@@ -1,2 +1,6 @@
 'Approx_areas_list_I', (1024, 12858)
 'iteration_range_I', (512, 265)
+'Approx_areas_list_I_Uni', (14336, 12858)
+'iteration_range_I_Uni', (27648, 265)
+'Approx_areas_list_I_LHS', (33280, 12858)
+'iteration_range_I_LHS', (28672, 265)

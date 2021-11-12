@@ -9,16 +9,19 @@ from cpp_stoch import (
 )
 
 
+
 def uniform_sampler(rng, lows, highs, n_samples):
     return rng.uniform(low=lows, high=highs, size=(n_samples, len(lows)))
+
 
 
 def latin_square_sampler(rng, lows, highs, n_samples):
     sampler = qmc.LatinHypercube(d=2, seed=rng)
     sample = sampler.random(n_samples)
-    scaled = qmc.scale(sample, lows, high)
+    scaled = qmc.scale(sample, lows, highs)
 
     return scaled
+
 
 
 def Monte_carlo(sample_size, max_iter, rng, sampler):
@@ -70,3 +73,4 @@ def S_iter_worker(q, d, max_iter, rng, sampler):
             sampler=sampler
         )
         d[i].append(Approx_area)
+    #q.close()
