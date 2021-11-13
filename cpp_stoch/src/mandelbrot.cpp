@@ -38,7 +38,6 @@ std::vector<std::vector<ZIterPair>> mandelbrot_grid(
     int max_iter = MAX_ITER,
     int d = 2
 ) {
-    omp_set_num_threads(8);
     std::vector<std::vector<ZIterPair>> grid(width, std::vector<ZIterPair>(height));
 
 #pragma omp parallel for
