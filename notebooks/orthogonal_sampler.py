@@ -10,18 +10,17 @@ def orthogonal_sampler_2d(rng, n_samples):
     lh = np.zeros(oa.shape)
 
     for c in range(oa.shape[1]):
-        # Yes, I overcomplicated this, and no, I'm not going to fix it
-        for k in range(1, (oa.shape[0]//s)+1):
-            col = oa[(k-1)*s:k*s:,c]
-            new_col = np.zeros(col.shape)
+        for k in range(1, s+1):
+            idxs = np.where(oa[:,c] == k)
+            col = oa[idxs]
+            new_col = np.zeros(len(idxs[0]))
 
-            for i in range(1, s+1):
-                new_col[i-1] = (col[k - 1] - 1)*s + i
+            for i in range(1, col.shape[0]+1):
+                new_col[i-1] = (k - 1)*s + i
 
-            lh[(k-1)*s:k*s:,c] = new_col
+            rng.shuffle(new_col)
 
-    for c in range(oa.shape[1]):
-        rng.shuffle(lh[:,c])
+            lh[idxs[0],c] = new_col
 
     samples = rng.uniform(size=oa.shape)
     lh = (lh - samples)/np.max(lh)
