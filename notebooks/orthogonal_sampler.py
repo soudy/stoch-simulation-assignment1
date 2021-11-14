@@ -25,4 +25,9 @@ def orthogonal_sampler_2d(rng, n_samples):
     samples = rng.uniform(size=oa.shape)
     lh = (lh - samples)/np.max(lh)
 
-    return lh
+    extra_samples = lh.shape[0] - n_samples
+    if extra_samples == 0:
+        return lh
+    else:
+        rand_rows = rng.choice(lh.shape[0], extra_samples, replace=False)
+        return np.delete(lh, rand_rows, axis=0)
