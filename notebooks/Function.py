@@ -80,3 +80,16 @@ def S_iter_worker(q, d, max_iter, rng, sampler):
         )
         d[i].append(Approx_area)
     #q.close()
+
+def N_iter_worker(q, d, sample_size, max_iter, rng, sampler):
+    while True:
+        try:
+            n_runs, i = q.get_nowait()
+        except queue.Empty:
+            break
+
+        Approx_area = Monte_carlo(
+            sample_size = sample_size, max_iter = max_iter, rng=rng,
+            sampler=sampler
+        )
+        d[n_runs].append(Approx_area)
