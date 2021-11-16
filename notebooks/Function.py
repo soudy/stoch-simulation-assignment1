@@ -7,7 +7,7 @@ from cpp_stoch import (
     set_num_threads,
     get_num_threads
 )
-from orthogonal_sampler import orthogonal_sampler_2d
+from orthogonal_sampler import orthogonal_sampler_2d, optimal_orthogonal_sampler_2d
 
 
 def uniform_sampler(rng, lows, highs, n_samples):
@@ -24,6 +24,14 @@ def latin_square_sampler(rng, lows, highs, n_samples):
 
 def orthogonal_sampler(rng, lows, highs, n_samples):
     sample = orthogonal_sampler_2d(rng, n_samples)
+    xs = (highs[0] - lows[0])*sample[:,0] + lows[0]
+    ys = (highs[1] - lows[1])*sample[:,1] + lows[1]
+
+    return np.array([xs, ys]).T
+
+
+def optimal_orthogonal_sampler(rng, lows, highs, n_samples):
+    sample = optimal_orthogonal_sampler_2d(rng, n_samples)
     xs = (highs[0] - lows[0])*sample[:,0] + lows[0]
     ys = (highs[1] - lows[1])*sample[:,1] + lows[1]
 
