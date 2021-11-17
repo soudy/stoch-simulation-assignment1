@@ -22,6 +22,18 @@ def latin_square_sampler(rng, lows, highs, n_samples):
     return scaled
 
 
+def scrambled_sobol_sampler(rng, lows, highs, n_samples):
+    m = np.log2(n_samples)
+    if np.mod(m, 1) != 0:
+        raise Exception(f"n_samples not a power of 2: {n_samples} (required for generating Sobol sequence)")
+
+    sampler = qmc.Sobol(d=2, seed=rng)
+    sample = sampler.random_base2(n_samples)
+    scaled = qmc.scale(sample, lows, highs)
+
+    return scaled
+
+
 def orthogonal_sampler(rng, lows, highs, n_samples):
     sample = orthogonal_sampler_2d(rng, n_samples)
     xs = (highs[0] - lows[0])*sample[:,0] + lows[0]
@@ -64,7 +76,6 @@ def I_iter_worker(q, d, sample_size, rng, sampler):
     while True:
         try:
             max_iter, i = q.get_nowait()
-            print(max_iter, i)
         except queue.Empty:
             break
 
@@ -87,7 +98,6 @@ def S_iter_worker(q, d, max_iter, rng, sampler):
             sampler=sampler
         )
         d[i].append(Approx_area)
-    #q.close()
 
 def N_iter_worker(q, d, sample_size, max_iter, rng, sampler):
     while True:
