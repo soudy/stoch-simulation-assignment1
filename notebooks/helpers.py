@@ -28,7 +28,7 @@ def scrambled_sobol_sampler(rng, lows, highs, n_samples):
         raise Exception(f"n_samples not a power of 2: {n_samples} (required for generating Sobol sequence)")
 
     sampler = qmc.Sobol(d=2, seed=rng)
-    sample = sampler.random_base2(m)
+    sample = sampler.random_base2(int(m))
     scaled = qmc.scale(sample, lows, highs)
 
     return scaled

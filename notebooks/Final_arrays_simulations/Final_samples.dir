@@ -9,3 +9,6 @@
 'Approx_area_S_10^2_I_10^2_OS', (21504, 1308)
 'Approx_area_S_10^5_I_10^4_QMS', (61440, 7243)
 'Approx_area_S_10^2_I_10^2_QMS', (24576, 1308)
+'Approx_area_S_10^5_2_power_OS', (69120, 7243)
+'Approx_area_S_10^5_2_power_QMS', (76800, 7243)
+'Approx_area_S_10^5_2_power_QMS_sobol', (84480, 7243)
