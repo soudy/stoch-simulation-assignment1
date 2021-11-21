@@ -4,6 +4,7 @@ Stochastic Simulations.
 It is organized in two folders:
 - `cpp_stoch`
 - `notebooks`
+
 The `cpp_stoch` folder contains the C++ code used for calculating the Mandelbrot
 set.
 It uses [pybind11](https://github.com/pybind/pybind11) to create Python
