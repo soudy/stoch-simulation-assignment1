@@ -1,6 +1,7 @@
 import numpy as np
 from itertools import product
 
+
 def orthogonal_sampler_2d(rng, n_samples):
     r = 2
     m = 2
@@ -11,7 +12,7 @@ def orthogonal_sampler_2d(rng, n_samples):
 
     for c in range(oa.shape[1]):
         for k in range(1, s+1):
-            idxs = np.where(oa[:,c] == k)
+            idxs = np.where(oa[:, c] == k)
             col = oa[idxs]
             new_col = np.zeros(len(idxs[0]))
 
@@ -20,7 +21,7 @@ def orthogonal_sampler_2d(rng, n_samples):
 
             rng.shuffle(new_col)
 
-            lh[idxs[0],c] = new_col
+            lh[idxs[0], c] = new_col
 
     samples = rng.uniform(size=oa.shape)
     lh = (lh - samples)/np.max(lh)
@@ -32,6 +33,7 @@ def orthogonal_sampler_2d(rng, n_samples):
         rand_rows = rng.choice(lh.shape[0], extra_samples, replace=False)
         return np.delete(lh, rand_rows, axis=0)
 
+
 def optimal_orthogonal_sampler_2d(rng, n_samples):
     r = 2
     m = 2
@@ -42,7 +44,7 @@ def optimal_orthogonal_sampler_2d(rng, n_samples):
 
     for c in range(oa.shape[1]):
         for k in range(1, s+1):
-            idxs = np.where(oa[:,c] == k)
+            idxs = np.where(oa[:, c] == k)
             col = oa[idxs]
             new_col = np.zeros(len(idxs[0]))
 
@@ -51,12 +53,12 @@ def optimal_orthogonal_sampler_2d(rng, n_samples):
 
             rng.shuffle(new_col)
 
-            lh[idxs[0],c] = new_col
+            lh[idxs[0], c] = new_col
 
     # search for optimal OA
     # just for column 0??
     for k in range(1, s+1):
-        row_idxs = np.where(oa[:,0] == k)[0]
+        row_idxs = np.where(oa[:, 0] == k)[0]
         base_idx = row_idxs[0]
         row_idxs = row_idxs[1:]
         rand_row = rng.choice(row_idxs)

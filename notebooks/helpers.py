@@ -25,7 +25,8 @@ def latin_square_sampler(rng, lows, highs, n_samples):
 def scrambled_sobol_sampler(rng, lows, highs, n_samples):
     m = np.log2(n_samples)
     if np.mod(m, 1) != 0:
-        raise Exception(f"n_samples not a power of 2: {n_samples} (required for generating Sobol sequence)")
+        raise Exception(
+            f"n_samples not a power of 2: {n_samples} (required for generating Sobol sequence)")
 
     sampler = qmc.Sobol(d=2, seed=rng)
     sample = sampler.random_base2(int(m))
@@ -44,16 +45,16 @@ def scrambled_halton_sampler(rng, lows, highs, n_samples):
 
 def orthogonal_sampler(rng, lows, highs, n_samples):
     sample = orthogonal_sampler_2d(rng, n_samples)
-    xs = (highs[0] - lows[0])*sample[:,0] + lows[0]
-    ys = (highs[1] - lows[1])*sample[:,1] + lows[1]
+    xs = (highs[0] - lows[0])*sample[:, 0] + lows[0]
+    ys = (highs[1] - lows[1])*sample[:, 1] + lows[1]
 
     return np.array([xs, ys]).T
 
 
 def optimal_orthogonal_sampler(rng, lows, highs, n_samples):
     sample = optimal_orthogonal_sampler_2d(rng, n_samples)
-    xs = (highs[0] - lows[0])*sample[:,0] + lows[0]
-    ys = (highs[1] - lows[1])*sample[:,1] + lows[1]
+    xs = (highs[0] - lows[0])*sample[:, 0] + lows[0]
+    ys = (highs[1] - lows[1])*sample[:, 1] + lows[1]
 
     return np.array([xs, ys]).T
 
@@ -70,7 +71,7 @@ def Monte_carlo(sample_size, max_iter, rng, sampler):
 
         (z, j) = f_c_cpp(c, max_iter, 2)
 
-        #Check if it is in set:  |z| <= 2
+        # Check if it is in set:  |z| <= 2
         if (j == max_iter):
             samples_in_set += 1
 
@@ -88,7 +89,7 @@ def I_iter_worker(q, d, sample_size, rng, sampler):
             break
 
         Approx_area = Monte_carlo(
-            sample_size = sample_size, max_iter = max_iter, rng=rng,
+            sample_size=sample_size, max_iter=max_iter, rng=rng,
             sampler=sampler
         )
         d[i].append(Approx_area)
@@ -102,10 +103,11 @@ def S_iter_worker(q, d, max_iter, rng, sampler):
             break
 
         Approx_area = Monte_carlo(
-            sample_size = sample_size, max_iter = max_iter, rng=rng,
+            sample_size=sample_size, max_iter=max_iter, rng=rng,
             sampler=sampler
         )
         d[i].append(Approx_area)
+
 
 def N_iter_worker(q, d, sample_size, max_iter, rng, sampler):
     while True:
@@ -115,7 +117,7 @@ def N_iter_worker(q, d, sample_size, max_iter, rng, sampler):
             break
 
         Approx_area = Monte_carlo(
-            sample_size = sample_size, max_iter = max_iter, rng=rng,
+            sample_size=sample_size, max_iter=max_iter, rng=rng,
             sampler=sampler
         )
         d[n_runs].append(Approx_area)
