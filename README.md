@@ -25,8 +25,8 @@ The notebooks are written in Python (3.7+) and uses the following libraries:
 ## C++ Bindings Installation
 In addition to the libraries listed in the prerequisites, a C++11 compiler is
 required for installing the C++ bindings (`gcc` on Linux, `clang` on macOS,
-MinGW or Visual Studio on windows).
-Once a C++11 compiler is present, you can install pybid11 as follows:
+MinGW or Visual Studio on Windows).
+Once a C++11 compiler is present, you can install pybind11 as follows:
 ```bash
 pip install pybind11
 ```
