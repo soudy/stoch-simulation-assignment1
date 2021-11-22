@@ -3,6 +3,15 @@ from itertools import product
 
 
 def orthogonal_sampler_2d(rng, n_samples):
+    """
+    Generates random points in a 2-dimensional space by constructing Latin
+    hypercubes with orthogonal arrays. This function implements the algorithm
+    described by https://www.tandfonline.com/doi/pdf/10.1080/0266476032000053691
+    in Section 2.
+
+    Returns:
+        (n_samples, 2) ndarray of random samples
+    """
     r = 2
     m = 2
     s = int(np.ceil(np.sqrt(n_samples)))

@@ -9,6 +9,9 @@
 namespace py = pybind11;
 
 PYBIND11_MODULE(cpp_stoch, m) {
+    /*
+     * Define bindings for Python to call our C++ functions.
+     */
     m.def("f_c", &f_c, R"pbdoc(Calculate z_n sequence)pbdoc",
           py::arg("c"), py::arg("max_iter") = MAX_ITER, py::arg("d") = 2);
     m.def(
