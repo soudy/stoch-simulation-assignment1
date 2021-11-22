@@ -56,14 +56,6 @@ def scrambled_sobol_sampler(rng, lows, highs, n_samples):
     return scaled
 
 
-def scrambled_halton_sampler(rng, lows, highs, n_samples):
-    sampler = qmc.Halton(d=2, seed=rng)
-    sample = sampler.random(n=n_samples)
-    scaled = qmc.scale(sample, lows, highs)
-
-    return scaled
-
-
 def orthogonal_sampler(rng, lows, highs, n_samples):
     """
     Generate 2-dimensional random numbers distributed in a orthogonal array
@@ -74,14 +66,6 @@ def orthogonal_sampler(rng, lows, highs, n_samples):
         (n_samples, 2) ndarray of random samples
     """
     sample = orthogonal_sampler_2d(rng, n_samples)
-    xs = (highs[0] - lows[0])*sample[:, 0] + lows[0]
-    ys = (highs[1] - lows[1])*sample[:, 1] + lows[1]
-
-    return np.array([xs, ys]).T
-
-
-def optimal_orthogonal_sampler(rng, lows, highs, n_samples):
-    sample = optimal_orthogonal_sampler_2d(rng, n_samples)
     xs = (highs[0] - lows[0])*sample[:, 0] + lows[0]
     ys = (highs[1] - lows[1])*sample[:, 1] + lows[1]
 
